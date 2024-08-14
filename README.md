@@ -2,3 +2,4 @@
 Laboratorios de Comunicaciones II
 
 Hola 08/08
+Hola 14/08 (PC Personal)
