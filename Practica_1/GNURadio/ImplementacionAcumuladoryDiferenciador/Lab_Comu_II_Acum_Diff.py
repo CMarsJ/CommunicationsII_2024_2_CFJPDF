@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: Lab_Comu_II_P1
+# Title: Lab_Comu_II_Acum_Diff
 # Author: CARLOS_CARREÑO_JUAN_PINTO
 # GNU Radio version: 3.10.9.2
 
@@ -21,18 +21,18 @@ from PyQt5 import Qt
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
-import Lab_Comu_II_P1_epy_block_0 as epy_block_0  # embedded python block
-import Lab_Comu_II_P1_epy_block_1 as epy_block_1  # embedded python block
+import Lab_Comu_II_Acum_Diff_epy_block_0 as epy_block_0  # embedded python block
+import Lab_Comu_II_Acum_Diff_epy_block_1 as epy_block_1  # embedded python block
 import sip
 
 
 
-class Lab_Comu_II_P1(gr.top_block, Qt.QWidget):
+class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Lab_Comu_II_P1", catch_exceptions=True)
+        gr.top_block.__init__(self, "Lab_Comu_II_Acum_Diff", catch_exceptions=True)
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("Lab_Comu_II_P1")
+        self.setWindowTitle("Lab_Comu_II_Acum_Diff")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -50,7 +50,7 @@ class Lab_Comu_II_P1(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "Lab_Comu_II_P1")
+        self.settings = Qt.QSettings("GNU Radio", "Lab_Comu_II_Acum_Diff")
 
         try:
             geometry = self.settings.value("geometry")
@@ -228,7 +228,7 @@ class Lab_Comu_II_P1(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "Lab_Comu_II_P1")
+        self.settings = Qt.QSettings("GNU Radio", "Lab_Comu_II_Acum_Diff")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
@@ -248,7 +248,7 @@ class Lab_Comu_II_P1(gr.top_block, Qt.QWidget):
 
 
 
-def main(top_block_cls=Lab_Comu_II_P1, options=None):
+def main(top_block_cls=Lab_Comu_II_Acum_Diff, options=None):
 
     qapp = Qt.QApplication(sys.argv)
 
