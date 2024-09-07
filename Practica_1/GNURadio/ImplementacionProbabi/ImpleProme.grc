@@ -62,7 +62,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 308.0]
+    coordinate: [288, 308.0]
     rotation: 0
     state: enabled
 - name: epy_block_0
@@ -106,7 +106,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 272.0]
+    coordinate: [480, 272.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0
@@ -169,7 +169,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 16.0]
+    coordinate: [832, 16.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_1
@@ -232,7 +232,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 288.0]
+    coordinate: [832, 288.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_2
@@ -275,7 +275,7 @@ blocks:
     label7: ''
     label8: ''
     label9: ''
-    max: '1'
+    max: '2'
     min: '-1'
     name: "\"Desviacion estandar de la se\xF1al\""
     nconnections: '1'
@@ -295,7 +295,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 560.0]
+    coordinate: [832, 560.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_3
@@ -358,7 +358,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 424.0]
+    coordinate: [832, 424.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_4
@@ -421,7 +421,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 152.0]
+    coordinate: [832, 152.0]
     rotation: 0
     state: enabled
 

@@ -154,7 +154,7 @@ class Lab_Comu_II_Pro(gr.top_block, Qt.QWidget):
 
         for i in range(1):
             self.qtgui_number_sink_2.set_min(i, -1)
-            self.qtgui_number_sink_2.set_max(i, 1)
+            self.qtgui_number_sink_2.set_max(i, 2)
             self.qtgui_number_sink_2.set_color(i, colors[i][0], colors[i][1])
             if len(labels[i]) == 0:
                 self.qtgui_number_sink_2.set_label(i, "Data {0}".format(i))

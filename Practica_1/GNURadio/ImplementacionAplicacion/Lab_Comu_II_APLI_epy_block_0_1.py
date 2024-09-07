@@ -17,17 +17,10 @@ class blk(gr.sync_block ):
         in_sig =[ np.float32 ],
         out_sig =[ np.float32 ]
     )
-        
     def work(self, input_items, output_items):
         x = input_items[0]  # Senal de entrada
         y0 = output_items[0]  # Senal acumulada
-        acumulado = np.cumsum(x)
+        acumulado = np.cumsum(x)/len(x)
 
         y0[:] = acumulado
         return len(y0)
-#    def work (self , input_items , output_items ):
-#        x = input_items[0] # Senial de entrada .
-#        y0 = output_items[0] # Senial acumulada
-#        y0[:] = np.cumsum(x)
-        #y0 [:] = len(y0)
-#        return len(y0)
