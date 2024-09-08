@@ -12,6 +12,7 @@
 from PyQt5 import Qt
 from gnuradio import qtgui
 from gnuradio import analog
+from gnuradio import blocks
 from gnuradio import gr
 from gnuradio.filter import firdes
 from gnuradio.fft import window
@@ -22,7 +23,9 @@ from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 import Lab_Comu_II_Acum_Diff_epy_block_0 as epy_block_0  # embedded python block
+import Lab_Comu_II_Acum_Diff_epy_block_0_0 as epy_block_0_0  # embedded python block
 import Lab_Comu_II_Acum_Diff_epy_block_1 as epy_block_1  # embedded python block
+import Lab_Comu_II_Acum_Diff_epy_block_1_0 as epy_block_1_0  # embedded python block
 import sip
 
 
@@ -116,7 +119,152 @@ class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
             self.qtgui_time_sink_x_2.set_line_alpha(i, alphas[i])
 
         self._qtgui_time_sink_x_2_win = sip.wrapinstance(self.qtgui_time_sink_x_2.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_time_sink_x_2_win)
+        self.top_grid_layout.addWidget(self._qtgui_time_sink_x_2_win, 0, 0, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 1):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_time_sink_x_1 = qtgui.time_sink_f(
+            Puntos, #size
+            samp_rate, #samp_rate
+            "Diferenciador", #name
+            1, #number of inputs
+            None # parent
+        )
+        self.qtgui_time_sink_x_1.set_update_time(0.3)
+        self.qtgui_time_sink_x_1.set_y_axis(-2, 2)
+
+        self.qtgui_time_sink_x_1.set_y_label('Amplitude Diferen', "")
+
+        self.qtgui_time_sink_x_1.enable_tags(True)
+        self.qtgui_time_sink_x_1.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_1.enable_autoscale(True)
+        self.qtgui_time_sink_x_1.enable_grid(False)
+        self.qtgui_time_sink_x_1.enable_axis_labels(True)
+        self.qtgui_time_sink_x_1.enable_control_panel(False)
+        self.qtgui_time_sink_x_1.enable_stem_plot(False)
+
+
+        labels = ['Signal 1', 'Signal 2', 'Signal 3', 'Signal 4', 'Signal 5',
+            'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
+        widths = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        colors = ['blue', 'red', 'green', 'black', 'cyan',
+            'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0]
+        styles = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        markers = [-1, -1, -1, -1, -1,
+            -1, -1, -1, -1, -1]
+
+
+        for i in range(1):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_1.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_1.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_1.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_1.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_1.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_1.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_1.set_line_alpha(i, alphas[i])
+
+        self._qtgui_time_sink_x_1_win = sip.wrapinstance(self.qtgui_time_sink_x_1.qwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_time_sink_x_1_win, 0, 2, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(2, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
+            Puntos, #size
+            samp_rate, #samp_rate
+            'Acumulador', #name
+            1, #number of inputs
+            None # parent
+        )
+        self.qtgui_time_sink_x_0.set_update_time(0.3)
+        self.qtgui_time_sink_x_0.set_y_axis(-30, 30)
+
+        self.qtgui_time_sink_x_0.set_y_label('Amplitude ', "")
+
+        self.qtgui_time_sink_x_0.enable_tags(False)
+        self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_0.enable_autoscale(True)
+        self.qtgui_time_sink_x_0.enable_grid(False)
+        self.qtgui_time_sink_x_0.enable_axis_labels(True)
+        self.qtgui_time_sink_x_0.enable_control_panel(False)
+        self.qtgui_time_sink_x_0.enable_stem_plot(False)
+
+
+        labels = ['Signal 1', 'Signal 2', 'Signal 3', 'Signal 4', 'Signal 5',
+            'Signal 6', 'Signal 7', 'Signal 8', 'Signal 9', 'Signal 10']
+        widths = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        colors = ['blue', 'red', 'green', 'black', 'cyan',
+            'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0]
+        styles = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+        markers = [-1, -1, -1, -1, -1,
+            -1, -1, -1, -1, -1]
+
+
+        for i in range(1):
+            if len(labels[i]) == 0:
+                self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_time_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_time_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_time_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_time_sink_x_0.set_line_style(i, styles[i])
+            self.qtgui_time_sink_x_0.set_line_marker(i, markers[i])
+            self.qtgui_time_sink_x_0.set_line_alpha(i, alphas[i])
+
+        self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.qwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win, 0, 1, 1, 1)
+        for r in range(0, 1):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.qtgui_number_sink_0_1 = qtgui.number_sink(
+            gr.sizeof_float,
+            0,
+            qtgui.NUM_GRAPH_HORIZ,
+            1,
+            None # parent
+        )
+        self.qtgui_number_sink_0_1.set_update_time(0.10)
+        self.qtgui_number_sink_0_1.set_title("SOURSE")
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        units = ['', '', '', '', '',
+            '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+
+        for i in range(1):
+            self.qtgui_number_sink_0_1.set_min(i, -1)
+            self.qtgui_number_sink_0_1.set_max(i, 1)
+            self.qtgui_number_sink_0_1.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0_1.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0_1.set_label(i, labels[i])
+            self.qtgui_number_sink_0_1.set_unit(i, units[i])
+            self.qtgui_number_sink_0_1.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0_1.enable_autoscale(False)
+        self._qtgui_number_sink_0_1_win = sip.wrapinstance(self.qtgui_number_sink_0_1.qwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_number_sink_0_1_win, 1, 0, 1, 3)
+        for r in range(1, 2):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_number_sink_0_0 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -147,9 +295,13 @@ class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
             self.qtgui_number_sink_0_0.set_unit(i, units[i])
             self.qtgui_number_sink_0_0.set_factor(i, factor[i])
 
-        self.qtgui_number_sink_0_0.enable_autoscale(True)
+        self.qtgui_number_sink_0_0.enable_autoscale(False)
         self._qtgui_number_sink_0_0_win = sip.wrapinstance(self.qtgui_number_sink_0_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_number_sink_0_0_win, 3, 0, 1, 3)
+        for r in range(3, 4):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
         self.qtgui_number_sink_0 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -180,11 +332,18 @@ class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
             self.qtgui_number_sink_0.set_unit(i, units[i])
             self.qtgui_number_sink_0.set_factor(i, factor[i])
 
-        self.qtgui_number_sink_0.enable_autoscale(True)
+        self.qtgui_number_sink_0.enable_autoscale(False)
         self._qtgui_number_sink_0_win = sip.wrapinstance(self.qtgui_number_sink_0.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_0_win)
+        self.top_grid_layout.addWidget(self._qtgui_number_sink_0_win, 2, 0, 1, 3)
+        for r in range(2, 3):
+            self.top_grid_layout.setRowStretch(r, 1)
+        for c in range(0, 3):
+            self.top_grid_layout.setColumnStretch(c, 1)
+        self.epy_block_1_0 = epy_block_1_0.blk()
         self.epy_block_1 = epy_block_1.blk()
+        self.epy_block_0_0 = epy_block_0_0.blk()
         self.epy_block_0 = epy_block_0.blk()
+        self.blocks_vector_source_x_0 = blocks.vector_source_f((1, 0, 1,0,1,0), True, 1, [])
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_SQR_WAVE, 100, 4, (-2), 1.57)
 
 
@@ -194,8 +353,13 @@ class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0, 0), (self.epy_block_0, 0))
         self.connect((self.analog_sig_source_x_0, 0), (self.epy_block_1, 0))
         self.connect((self.analog_sig_source_x_0, 0), (self.qtgui_time_sink_x_2, 0))
-        self.connect((self.epy_block_0, 0), (self.qtgui_number_sink_0, 0))
-        self.connect((self.epy_block_1, 0), (self.qtgui_number_sink_0_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.epy_block_0_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.epy_block_1_0, 0))
+        self.connect((self.blocks_vector_source_x_0, 0), (self.qtgui_number_sink_0_1, 0))
+        self.connect((self.epy_block_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.epy_block_0_0, 0), (self.qtgui_number_sink_0, 0))
+        self.connect((self.epy_block_1, 0), (self.qtgui_time_sink_x_1, 0))
+        self.connect((self.epy_block_1_0, 0), (self.qtgui_number_sink_0_0, 0))
 
 
     def closeEvent(self, event):
@@ -212,6 +376,8 @@ class Lab_Comu_II_Acum_Diff(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
+        self.qtgui_time_sink_x_1.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_2.set_samp_rate(self.samp_rate)
 
     def get_Puntos(self):
