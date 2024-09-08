@@ -117,7 +117,7 @@ blocks:
       \    # Calcular el acumulado, continuando desde el valor acumulado anterior\n\
       \        y[:] = np.cumsum(x) + self.acumulado_anterior\n\n        # Guardar\
       \ el valor acumulado para el siguiente bloque\n        self.acumulado_anterior\
-      \ = y[N-1]  # El ultimo valor acumulado se guarda\n\n        return len(y)\n\
+      \ = y[N-1]  # El ultimo valor acumulado se guarda\n\n\n        return len(y)\n\
       #    def work (self , input_items , output_items ):\n#        x = input_items[0]\
       \ # Senial de entrada .\n#        y0 = output_items[0] # Senial acumulada\n\
       #        y0[:] = np.cumsum(x)\n        #y0 [:] = len(y0)\n#        return len(y0)"
@@ -151,8 +151,8 @@ blocks:
       \ la diferencia entre valores consecutivos\n\t\ty[0] = x[0] - self.anterior\
       \  # Diferencia con el valor anterior\n\t\ty[1:] = np.diff(x)  # Diferencia\
       \ entre valores consecutivos de la senal\n\n        # Actualizar el valor anterior\
-      \ para el siguiente bloque de procesamiento\n\t\tself.anterior = x[N-1]\n\t\t\
-      \n\t\treturn len(y)\n"
+      \ para el siguiente bloque de procesamiento\n\t\tself.anterior = x[N-1]\n\n\t\
+      \t\n\t\treturn len(y)\n"
     affinity: ''
     alias: ''
     comment: Diferenciador
@@ -227,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 24.0]
+    coordinate: [760, 32.0]
     rotation: 0
     state: disabled
 - name: qtgui_number_sink_0_0
@@ -290,7 +290,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 424.0]
+    coordinate: [752, 424.0]
     rotation: 0
     state: disabled
 - name: qtgui_number_sink_0_1
@@ -450,7 +450,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [744, 188.0]
+    coordinate: [752, 188.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_1

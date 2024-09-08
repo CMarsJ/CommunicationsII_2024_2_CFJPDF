@@ -148,7 +148,7 @@ blocks:
     label9: ''
     max: '1'
     min: '-1'
-    name: "\"Promedio de la se\xF1al (Media)\""
+    name: "\"Promedio de la se\xF1al\""
     nconnections: '1'
     type: float
     unit1: ''
@@ -337,7 +337,7 @@ blocks:
     label9: ''
     max: '1'
     min: '-1'
-    name: "\"Potencia promedio de la se\xF1al\""
+    name: "\"Media Cuadratica de la se\xF1al\""
     nconnections: '1'
     type: float
     unit1: ''

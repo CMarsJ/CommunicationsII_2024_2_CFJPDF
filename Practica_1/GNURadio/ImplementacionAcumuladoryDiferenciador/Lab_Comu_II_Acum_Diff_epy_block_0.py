@@ -29,6 +29,8 @@ class blk(gr.sync_block ):
         # Guardar el valor acumulado para el siguiente bloque
         self.acumulado_anterior = y[N-1]  # El ultimo valor acumulado se guarda
 
+        y [:] = len(y)
+
         return len(y)
 #    def work (self , input_items , output_items ):
 #        x = input_items[0] # Senial de entrada .

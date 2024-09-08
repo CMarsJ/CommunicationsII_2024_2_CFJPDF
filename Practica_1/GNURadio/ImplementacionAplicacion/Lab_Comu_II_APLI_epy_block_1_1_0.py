@@ -26,8 +26,6 @@ class blk(gr.sync_block ):
 		y[1:] = np.diff(x)  # Diferencia entre valores consecutivos de la senal
 
         # Actualizar el valor anterior para el siguiente bloque de procesamiento
-		self.anterior = x[N-1]
-
-		y[:] = len(y)
+		self.anterior = x[-1]
 		
 		return len(y)
