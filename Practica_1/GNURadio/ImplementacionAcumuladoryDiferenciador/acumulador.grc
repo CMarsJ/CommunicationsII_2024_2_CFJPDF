@@ -37,7 +37,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '10000'
+    value: '1024'
   states:
     bus_sink: false
     bus_source: false
@@ -49,7 +49,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '100000'
+    value: '10000'
   states:
     bus_sink: false
     bus_source: false
@@ -64,11 +64,11 @@ blocks:
     alias: ''
     amp: '4'
     comment: ''
-    freq: '1000'
+    freq: '100'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '-2'
-    phase: '0'
+    phase: '1.57'
     samp_rate: samp_rate
     showports: 'False'
     type: float
@@ -80,50 +80,6 @@ blocks:
     coordinate: [120, 168.0]
     rotation: 0
     state: enabled
-- name: analog_sig_source_x_0_0
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '4'
-    comment: ''
-    freq: '1000'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '-2'
-    phase: '0'
-    samp_rate: samp_rate
-    showports: 'False'
-    type: float
-    waveform: analog.GR_TRI_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [120, 328.0]
-    rotation: 0
-    state: enabled
-- name: blocks_throttle2_0
-  id: blocks_throttle2
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    limit: auto
-    maximum: '0.1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [728, 220.0]
-    rotation: 0
-    state: disabled
 - name: blocks_vector_source_x_0
   id: blocks_vector_source_x
   parameters:
@@ -141,7 +97,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 484.0]
+    coordinate: [152, 364.0]
     rotation: 0
     state: disabled
 - name: epy_block_0
@@ -153,12 +109,16 @@ blocks:
       \ them are required to have default values!\n\"\"\"\n\nimport numpy as np\n\
       from gnuradio import gr\n\nclass blk(gr.sync_block ):\n    def __init__ ( self\
       \ ) : # only default arguments here\n        gr.sync_block.__init__ (\n    \
-      \    self ,\n        name =\"e_Acum\", # will show up in GRC\n        in_sig\
-      \ =[ np.float32 ],\n        out_sig =[ np.float32 ]\n    )\n        \n    def\
-      \ work(self, input_items, output_items):\n        x = input_items[0]  # Senal\
-      \ de entrada\n        y0 = output_items[0]  # Senal acumulada\n        acumulado\
-      \ = np.cumsum(x)\n\n        y0[:] = acumulado\n        return len(y0)\n#   \
-      \ def work (self , input_items , output_items ):\n#        x = input_items[0]\
+      \    self ,\n        name =\"e_Acum2\", # will show up in GRC\n        in_sig\
+      \ =[ np.float32 ],\n        out_sig =[ np.float32 ])\n        self.acumulado_anterior\
+      \ = 0  # Para almacenar el valor acumulado hasta el momento\n\n    def work(self,\
+      \ input_items, output_items):\n        x = input_items[0]  # Senal de entrada\n\
+      \        y = output_items[0]  # Senal acumulada\n        N = len(x)\n\n    \
+      \    # Calcular el acumulado, continuando desde el valor acumulado anterior\n\
+      \        y[:] = np.cumsum(x) + self.acumulado_anterior\n\n        # Guardar\
+      \ el valor acumulado para el siguiente bloque\n        self.acumulado_anterior\
+      \ = y[N-1]  # El ultimo valor acumulado se guarda\n\n        return len(y)\n\
+      #    def work (self , input_items , output_items ):\n#        x = input_items[0]\
       \ # Senial de entrada .\n#        y0 = output_items[0] # Senial acumulada\n\
       #        y0[:] = np.cumsum(x)\n        #y0 [:] = len(y0)\n#        return len(y0)"
     affinity: ''
@@ -167,7 +127,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('e_Acum', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)], '',
+    _io_cache: ('e_Acum2', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)], '',
       [])
     bus_sink: false
     bus_source: false
@@ -182,26 +142,29 @@ blocks:
       \ GRC will instantiate the first class it finds\nto get ports and parameters\
       \ of your block. The arguments to __init__  will\nbe the parameters. All of\
       \ them are required to have default values!\n\"\"\"\nimport numpy as np\nfrom\
-      \ gnuradio import gr\nclass blk (gr. sync_block ):\n\tdef __init__ ( self )\
-      \ : # only default arguments here\n\t\tgr. sync_block . __init__ (\n\t\t\tself\
-      \ ,\n\t\t\tname =\"e_Diff\" , # will show up in GRC\n\t\t\tin_sig =[ np. float32\
-      \ ],\n\t\t\tout_sig =[ np. float32 ]\n\t\t)\n\t\tself . acum_anterior = 0\n\t\
-      \t\t\n\tdef work (self , input_items , output_items ):\n\t\tx = input_items\
-      \ [0] # Senial de entrada .\n\t\ty0 = output_items [0] # Senial acumulada diferencial\n\
-      \t\tN = len (x)\n\t\tdiff = (np. cumsum (x) - self . acum_anterior)\n\t\tself\
-      \ . acum_anterior = diff [N -1]\n\t\ty0 [:] = diff\n\t\treturn len(y0)\n"
+      \ gnuradio import gr\nclass blk(gr.sync_block ):\n\tdef __init__( self ) : #\
+      \ only default arguments here\n\t\tgr.sync_block.__init__ (\n\t\t\tself ,\n\t\
+      \t\tname =\"e_Diff2\" , # will show up in GRC\n\t\t\tin_sig =[ np.float32 ],\n\
+      \t\t\tout_sig =[ np.float32 ]\n\t\t)\n\t\tself.anterior = 0\n\tdef work(self\
+      \ , input_items , output_items ):\n\t\tx = input_items[0]  # Senal de entrada\n\
+      \t\ty = output_items[0]  # Senal diferenciada\n\t\tN = len(x)\n\n        # Calcular\
+      \ la diferencia entre valores consecutivos\n\t\ty[0] = x[0] - self.anterior\
+      \  # Diferencia con el valor anterior\n\t\ty[1:] = np.diff(x)  # Diferencia\
+      \ entre valores consecutivos de la senal\n\n        # Actualizar el valor anterior\
+      \ para el siguiente bloque de procesamiento\n\t\tself.anterior = x[N-1]\n\t\t\
+      \n\t\treturn len(y)\n"
     affinity: ''
     alias: ''
     comment: Diferenciador
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
-    _io_cache: ('e_Diff', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)], '',
+    _io_cache: ('e_Diff2', 'blk', [], [('0', 'float', 1)], [('0', 'float', 1)], '',
       [])
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [552, 320.0]
+    coordinate: [560, 320.0]
     rotation: 0
     state: enabled
 - name: qtgui_number_sink_0
@@ -264,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 88.0]
+    coordinate: [744, 24.0]
     rotation: 0
     state: disabled
 - name: qtgui_number_sink_0_0
@@ -327,7 +290,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [712, 360.0]
+    coordinate: [744, 424.0]
     rotation: 0
     state: disabled
 - name: qtgui_number_sink_0_1
@@ -390,7 +353,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 512.0]
+    coordinate: [504, 392.0]
     rotation: 0
     state: disabled
 - name: qtgui_time_sink_x_0
@@ -408,7 +371,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -422,7 +385,7 @@ blocks:
     color9: dark green
     comment: ''
     ctrlpanel: 'False'
-    entags: 'True'
+    entags: 'False'
     grid: 'False'
     gui_hint: ''
     label1: Signal 1
@@ -446,7 +409,7 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-    name: '"Acumulador'
+    name: Acumulador
     nconnections: '1'
     size: Puntos
     srate: samp_rate
@@ -468,7 +431,7 @@ blocks:
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.5'
+    update_time: '0.3'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -479,15 +442,15 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    ylabel: Amplitude Acumu
-    ymax: '70'
-    ymin: '-70'
+    ylabel: 'Amplitude '
+    ymax: '30'
+    ymin: '-30'
     yunit: '""'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 188.0]
+    coordinate: [744, 188.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_1
@@ -545,8 +508,8 @@ blocks:
     marker9: '-1'
     name: '"Diferenciador"'
     nconnections: '1'
-    size: Puntos*10
-    srate: samp_rate*10
+    size: Puntos
+    srate: samp_rate
     stemplot: 'False'
     style1: '1'
     style10: '1'
@@ -565,7 +528,7 @@ blocks:
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.5'
+    update_time: '0.3'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -584,7 +547,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [976, 300.0]
+    coordinate: [752, 300.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_2
@@ -662,7 +625,7 @@ blocks:
     tr_slope: qtgui.TRIG_SLOPE_POS
     tr_tag: '""'
     type: float
-    update_time: '0.10'
+    update_time: '0.3'
     width1: '1'
     width10: '1'
     width2: '1'
@@ -674,8 +637,8 @@ blocks:
     width8: '1'
     width9: '1'
     ylabel: Amplitude
-    ymax: '2'
-    ymin: '-2'
+    ymax: '3'
+    ymin: '-3'
     yunit: '""'
   states:
     bus_sink: false
@@ -684,114 +647,14 @@ blocks:
     coordinate: [496, 84.0]
     rotation: 0
     state: enabled
-- name: qtgui_time_sink_x_2_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'False'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: '"Original Diff"'
-    nconnections: '1'
-    size: '1024'
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '2'
-    ymin: '-2'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [496, 380.0]
-    rotation: 0
-    state: enabled
 
 connections:
 - [analog_sig_source_x_0, '0', epy_block_0, '0']
+- [analog_sig_source_x_0, '0', epy_block_1, '0']
 - [analog_sig_source_x_0, '0', qtgui_time_sink_x_2, '0']
-- [analog_sig_source_x_0_0, '0', epy_block_1, '0']
-- [analog_sig_source_x_0_0, '0', qtgui_time_sink_x_2_0, '0']
-- [blocks_throttle2_0, '0', qtgui_time_sink_x_0, '0']
 - [blocks_vector_source_x_0, '0', epy_block_0, '0']
 - [blocks_vector_source_x_0, '0', epy_block_1, '0']
 - [blocks_vector_source_x_0, '0', qtgui_number_sink_0_1, '0']
-- [epy_block_0, '0', blocks_throttle2_0, '0']
 - [epy_block_0, '0', qtgui_number_sink_0, '0']
 - [epy_block_0, '0', qtgui_time_sink_x_0, '0']
 - [epy_block_1, '0', qtgui_number_sink_0_0, '0']

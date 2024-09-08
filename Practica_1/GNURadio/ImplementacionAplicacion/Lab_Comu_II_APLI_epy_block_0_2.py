@@ -24,10 +24,11 @@ class blk(gr.sync_block ):
         N = len(x)
 
         # Calcular el acumulado, continuando desde el valor acumulado anterior
-        y[:] = np.cumsum(x) + self.acumulado_anterior
-
+        y[:] = (np.cumsum(x) + self.acumulado_anterior)
+        max = np.max(np.abs(y))
+        y[:] = y/max
         # Guardar el valor acumulado para el siguiente bloque
-        self.acumulado_anterior = y[N-1]  # El ultimo valor acumulado se guarda
+        self.acumulado_anterior = y[-1]  # El ultimo valor acumulado se guarda
 
         return len(y)
 #    def work (self , input_items , output_items ):

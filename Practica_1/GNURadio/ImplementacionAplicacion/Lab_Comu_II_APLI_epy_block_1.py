@@ -22,7 +22,7 @@ class blk (gr. sync_block ):
 		x = input_items [0] # Senial de entrada .
 		y0 = output_items [0] # Senial acumulada diferencial
 		N = len (x)
-		diff = (np. cumsum (x) - self . acum_anterior)
-		self . acum_anterior = diff [N -1]
+		diff = (np.cumsum (x) - self . acum_anterior)
+		self . acum_anterior = diff [N-1]
 		y0 [:] = diff
 		return len(y0)

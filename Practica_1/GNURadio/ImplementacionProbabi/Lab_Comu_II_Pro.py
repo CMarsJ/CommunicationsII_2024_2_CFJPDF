@@ -67,39 +67,6 @@ class Lab_Comu_II_Pro(gr.top_block, Qt.QWidget):
         # Blocks
         ##################################################
 
-        self.qtgui_number_sink_4 = qtgui.number_sink(
-            gr.sizeof_float,
-            0,
-            qtgui.NUM_GRAPH_HORIZ,
-            1,
-            None # parent
-        )
-        self.qtgui_number_sink_4.set_update_time(0.10)
-        self.qtgui_number_sink_4.set_title("Media de la señal")
-
-        labels = ['', '', '', '', '',
-            '', '', '', '', '']
-        units = ['', '', '', '', '',
-            '', '', '', '', '']
-        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
-            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
-        factor = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-
-        for i in range(1):
-            self.qtgui_number_sink_4.set_min(i, -1)
-            self.qtgui_number_sink_4.set_max(i, 1)
-            self.qtgui_number_sink_4.set_color(i, colors[i][0], colors[i][1])
-            if len(labels[i]) == 0:
-                self.qtgui_number_sink_4.set_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_number_sink_4.set_label(i, labels[i])
-            self.qtgui_number_sink_4.set_unit(i, units[i])
-            self.qtgui_number_sink_4.set_factor(i, factor[i])
-
-        self.qtgui_number_sink_4.enable_autoscale(False)
-        self._qtgui_number_sink_4_win = sip.wrapinstance(self.qtgui_number_sink_4.qwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_number_sink_4_win)
         self.qtgui_number_sink_3 = qtgui.number_sink(
             gr.sizeof_float,
             0,
@@ -207,7 +174,7 @@ class Lab_Comu_II_Pro(gr.top_block, Qt.QWidget):
             None # parent
         )
         self.qtgui_number_sink_0.set_update_time(0.10)
-        self.qtgui_number_sink_0.set_title("Promedio de la señal")
+        self.qtgui_number_sink_0.set_title("Promedio de la señal (Media)")
 
         labels = ['', '', '', '', '',
             '', '', '', '', '']
@@ -242,9 +209,8 @@ class Lab_Comu_II_Pro(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_vector_source_x_0, 0), (self.epy_block_0, 0))
         self.connect((self.epy_block_0, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.epy_block_0, 2), (self.qtgui_number_sink_1, 0))
-        self.connect((self.epy_block_0, 4), (self.qtgui_number_sink_2, 0))
-        self.connect((self.epy_block_0, 3), (self.qtgui_number_sink_3, 0))
-        self.connect((self.epy_block_0, 1), (self.qtgui_number_sink_4, 0))
+        self.connect((self.epy_block_0, 3), (self.qtgui_number_sink_2, 0))
+        self.connect((self.epy_block_0, 1), (self.qtgui_number_sink_3, 0))
 
 
     def closeEvent(self, event):
