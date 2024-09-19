@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0
 #
 # GNU Radio Python Flow Graph
-# Title: Not titled yet
+# Title: PSD
 # Author: radiogis_director
 # GNU Radio version: v3.8.2.0-57-gd71cd177
 
@@ -42,12 +42,12 @@ import numpy as np
 
 from gnuradio import qtgui
 
-class prac3a(gr.top_block, Qt.QWidget):
+class Practica_2(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Not titled yet")
+        gr.top_block.__init__(self, "PSD")
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("Not titled yet")
+        self.setWindowTitle("PSD")
         qtgui.util.check_set_qss()
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
@@ -65,7 +65,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "prac3a")
+        self.settings = Qt.QSettings("GNU Radio", "Practica_2")
 
         try:
             if StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
@@ -78,7 +78,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.h = h = np.array([1,1,1,1])
+        self.h = h = np.array([1])
         self.Sps = Sps = len(h)
         self.Rb = Rb = 32000
         self.samp_rate = samp_rate = Rb*Sps
@@ -111,7 +111,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.qtgui_vector_sink_f_0.set_update_time(0.10)
         self.qtgui_vector_sink_f_0.set_y_axis(0, 1/Rb)
         self.qtgui_vector_sink_f_0.enable_autoscale(False)
-        self.qtgui_vector_sink_f_0.enable_grid(False)
+        self.qtgui_vector_sink_f_0.enable_grid(True)
         self.qtgui_vector_sink_f_0.set_x_axis_units("Hz")
         self.qtgui_vector_sink_f_0.set_y_axis_units("Watss/Hz")
         self.qtgui_vector_sink_f_0.set_ref_level(0)
@@ -154,7 +154,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_0.enable_tags(True)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
         self.qtgui_time_sink_x_0.enable_autoscale(True)
-        self.qtgui_time_sink_x_0.enable_grid(False)
+        self.qtgui_time_sink_x_0.enable_grid(True)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
         self.qtgui_time_sink_x_0.enable_control_panel(False)
         self.qtgui_time_sink_x_0.enable_stem_plot(False)
@@ -210,7 +210,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_x_0.enable_control_panel(False)
 
 
-        self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
+        self.qtgui_freq_sink_x_0.set_plot_pos_half(not False)
 
         labels = ['', '', '', '', '',
             '', '', '', '', '']
@@ -275,7 +275,7 @@ class prac3a(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "prac3a")
+        self.settings = Qt.QSettings("GNU Radio", "Practica_2")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
@@ -326,7 +326,7 @@ class prac3a(gr.top_block, Qt.QWidget):
 
 
 
-def main(top_block_cls=prac3a, options=None):
+def main(top_block_cls=Practica_2, options=None):
 
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
         style = gr.prefs().get_string('qtgui', 'style', 'raster')
