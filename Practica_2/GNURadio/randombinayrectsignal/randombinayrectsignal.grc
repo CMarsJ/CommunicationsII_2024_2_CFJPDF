@@ -1,6 +1,7 @@
 options:
   parameters:
     author: radiogis_director
+    catch_exceptions: 'True'
     category: '[GRC Hier Blocks]'
     cmake_opt: ''
     comment: ''
@@ -72,7 +73,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: np.array([1])
+    value: np.array([1,1,1,1])
   states:
     bus_sink: false
     bus_source: false
@@ -468,6 +469,7 @@ blocks:
     minoutbuf: '0'
     name: '""'
     nconnections: '1'
+    norm_window: 'False'
     showports: 'False'
     tr_chan: '0'
     tr_level: '0.0'
@@ -486,7 +488,7 @@ blocks:
     width7: '1'
     width8: '1'
     width9: '1'
-    wintype: firdes.WIN_BLACKMAN_hARRIS
+    wintype: window.WIN_BLACKMAN_hARRIS
     ymax: '10'
     ymin: '-140'
   states:
@@ -633,6 +635,7 @@ blocks:
     label7: ''
     label8: ''
     label9: ''
+    legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
     name: '"PSD (Watts/Hz)"'
@@ -754,3 +757,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: 3.10.10.0
