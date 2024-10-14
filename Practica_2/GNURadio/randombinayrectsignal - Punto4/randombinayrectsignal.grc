@@ -141,7 +141,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 120.0]
+    coordinate: [728, 120.0]
     rotation: 0
     state: enabled
 - name: analog_noise_source_x_0
@@ -160,7 +160,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1152, 236.0]
+    coordinate: [1464, 236.0]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -178,7 +178,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [720, 152.0]
+    coordinate: [1032, 152.0]
     rotation: 0
     state: enabled
 - name: blocks_char_to_float_0
@@ -195,7 +195,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 176.0]
+    coordinate: [728, 176.0]
     rotation: 0
     state: true
 - name: blocks_complex_to_mag_squared_0
@@ -252,7 +252,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [824, 160.0]
+    coordinate: [1136, 160.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_1
@@ -324,7 +324,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1272, 160.0]
+    coordinate: [1584, 160.0]
     rotation: 0
     state: true
 - name: blocks_unpack_k_bits_bb_0
@@ -333,7 +333,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    k: '8'
+    k: '16'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -420,7 +420,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1016, 148.0]
+    coordinate: [1328, 148.0]
     rotation: 0
     state: enabled
 - name: note_0
@@ -517,6 +517,69 @@ blocks:
     coordinate: [216, 716.0]
     rotation: 0
     state: true
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '""'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 324.0]
+    rotation: 0
+    state: enabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -698,7 +761,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560.0, 264]
+    coordinate: [872.0, 264]
     rotation: 270
     state: true
 - name: virtual_sink_0_1_0
@@ -711,7 +774,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1448.0, 240]
+    coordinate: [1760.0, 240]
     rotation: 270
     state: enabled
 - name: virtual_sink_0_1_0_0
@@ -724,7 +787,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1352.0, 328]
+    coordinate: [1664.0, 328]
     rotation: 270
     state: enabled
 - name: virtual_source_0
@@ -753,6 +816,19 @@ blocks:
     coordinate: [8, 456.0]
     rotation: 0
     state: true
+- name: virtual_source_0_1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: p3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [968, 352.0]
+    rotation: 0
+    state: enabled
 
 connections:
 - [analog_const_source_x_0_0, '0', blocks_add_xx_0, '0']
@@ -774,6 +850,7 @@ connections:
 - [virtual_source_0, '0', qtgui_freq_sink_x_0, '0']
 - [virtual_source_0, '0', qtgui_time_sink_x_0, '0']
 - [virtual_source_0_0, '0', blocks_null_sink_0, '0']
+- [virtual_source_0_1, '0', qtgui_number_sink_0, '0']
 
 metadata:
   file_format: 1

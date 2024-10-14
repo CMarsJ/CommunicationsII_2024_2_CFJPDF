@@ -66,7 +66,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.h = h = np.array([1,1,1,1])
+        self.h = h = np.array([0.5,-0.5,0.5,-0.5,0.5,-0.5,0.5,-0.5,0,0,0,0,0,0,0,0])
         self.Sps = Sps = len(h)
         self.Rb = Rb = 32000
         self.samp_rate = samp_rate = Rb*Sps
@@ -183,6 +183,39 @@ class prac3a(gr.top_block, Qt.QWidget):
             self.Menu_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.Menu_grid_layout_0.setColumnStretch(c, 1)
+        self.qtgui_number_sink_0 = qtgui.number_sink(
+            gr.sizeof_float,
+            0,
+            qtgui.NUM_GRAPH_HORIZ,
+            1,
+            None # parent
+        )
+        self.qtgui_number_sink_0.set_update_time(0.10)
+        self.qtgui_number_sink_0.set_title("")
+
+        labels = ['', '', '', '', '',
+            '', '', '', '', '']
+        units = ['', '', '', '', '',
+            '', '', '', '', '']
+        colors = [("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"),
+            ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black"), ("black", "black")]
+        factor = [1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1]
+
+        for i in range(1):
+            self.qtgui_number_sink_0.set_min(i, -1)
+            self.qtgui_number_sink_0.set_max(i, 1)
+            self.qtgui_number_sink_0.set_color(i, colors[i][0], colors[i][1])
+            if len(labels[i]) == 0:
+                self.qtgui_number_sink_0.set_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_number_sink_0.set_label(i, labels[i])
+            self.qtgui_number_sink_0.set_unit(i, units[i])
+            self.qtgui_number_sink_0.set_factor(i, factor[i])
+
+        self.qtgui_number_sink_0.enable_autoscale(False)
+        self._qtgui_number_sink_0_win = sip.wrapinstance(self.qtgui_number_sink_0.qwidget(), Qt.QWidget)
+        self.top_layout.addWidget(self._qtgui_number_sink_0_win)
         self.qtgui_freq_sink_x_0 = qtgui.freq_sink_f(
             N, #size
             window.WIN_BLACKMAN_hARRIS, #wintype
@@ -240,11 +273,11 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.blocks_multiply_const_vxx_1 = blocks.multiply_const_vff([1/(N*samp_rate)]*N)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(2.)
         self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(N)
-        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 2)
         self.blocks_add_xx_0 = blocks.add_vff(1)
         self.analog_random_source_x_0 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 2, 1000000))), True)
         self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 1, 76)
-        self.analog_const_source_x_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, (-1./2.))
+        self.analog_const_source_x_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, (-1))
 
 
         ##################################################
@@ -255,6 +288,7 @@ class prac3a(gr.top_block, Qt.QWidget):
         self.connect((self.analog_random_source_x_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.blocks_char_to_float_0, 0), (self.blocks_add_xx_0, 1))
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_number_sink_0, 0))
         self.connect((self.blocks_complex_to_mag_squared_0, 0), (self.epy_block_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.interp_fir_filter_xxx_0, 0))
         self.connect((self.blocks_multiply_const_vxx_1, 0), (self.qtgui_vector_sink_f_0, 0))
